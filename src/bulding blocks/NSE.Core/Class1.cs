@@ -1,6 +1,4 @@
-﻿using System;
-
-namespace NSE.Core
+﻿namespace NSE.Core
 {
     public class Class1
     {
