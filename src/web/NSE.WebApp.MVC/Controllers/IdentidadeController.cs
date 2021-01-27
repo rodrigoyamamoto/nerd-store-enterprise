@@ -11,7 +11,7 @@ using NSE.WebApp.MVC.Services;
 
 namespace NSE.WebApp.MVC.Controllers
 {
-    public class IdentidadeController : Controller
+    public class IdentidadeController : MainController
     {
         private readonly IAutenticacaoService _autenticacaoService;
 
@@ -23,17 +23,21 @@ namespace NSE.WebApp.MVC.Controllers
         [HttpGet]
         [Route("nova-conta")]
         public IActionResult Registro()
-        {
-            return View();
-        }
+            => View();
 
         [HttpPost]
         [Route("nova-conta")]
         public async Task<IActionResult> Registro(UsuarioRegistro usuarioRegistro)
         {
-            if (!ModelState.IsValid) return View(usuarioRegistro);
+            if (!ModelState.IsValid)
+                return View(usuarioRegistro);
 
             var resposta = await _autenticacaoService.Registro(usuarioRegistro);
+
+            if (ResponsePossuiErros(resposta.ResponseResult))
+                return View(usuarioRegistro);
+
+            await RealizarLogin(resposta);
 
             return RedirectToAction(nameof(Index), "Home");
         }
@@ -50,9 +54,13 @@ namespace NSE.WebApp.MVC.Controllers
         [Route("login")]
         public async Task<IActionResult> Login(UsuarioLogin usuarioLogin)
         {
-            if (!ModelState.IsValid) return View(usuarioLogin);
+            if (!ModelState.IsValid)
+                return View(usuarioLogin);
 
             var resposta = await _autenticacaoService.Login(usuarioLogin);
+
+            if (ResponsePossuiErros(resposta.ResponseResult))
+                return View(usuarioLogin);
 
             await RealizarLogin(resposta);
 
@@ -62,9 +70,8 @@ namespace NSE.WebApp.MVC.Controllers
         [HttpGet]
         [Route("sair")]
         public async Task<IActionResult> Logout()
-        {
-            return RedirectToAction(nameof(Index), "Home");
-        }
+            => RedirectToAction(nameof(Index), "Home");
+
 
         private async Task RealizarLogin(UsuarioRespostaLogin resposta)
         {
@@ -89,8 +96,7 @@ namespace NSE.WebApp.MVC.Controllers
         }
 
         private static JwtSecurityToken ObterTokenFormatado(string jwtToken)
-        {
-            return new JwtSecurityTokenHandler().ReadToken(jwtToken) as JwtSecurityToken;
-        }
+            => new JwtSecurityTokenHandler().ReadToken(jwtToken) as JwtSecurityToken;
+
     }
 }
