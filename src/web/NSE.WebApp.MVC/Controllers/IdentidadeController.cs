@@ -23,7 +23,10 @@ namespace NSE.WebApp.MVC.Controllers
         [HttpGet]
         [Route("nova-conta")]
         public IActionResult Registro()
-            => View();
+        {
+            return View();
+        }
+
 
         [HttpPost]
         [Route("nova-conta")]
@@ -70,8 +73,10 @@ namespace NSE.WebApp.MVC.Controllers
         [HttpGet]
         [Route("sair")]
         public async Task<IActionResult> Logout()
-            => RedirectToAction(nameof(Index), "Home");
-
+        {
+            await HttpContext.SignOutAsync(CookieAuthenticationDefaults.AuthenticationScheme);
+            return RedirectToAction(nameof(Index), "Home");
+        }
 
         private async Task RealizarLogin(UsuarioRespostaLogin resposta)
         {
@@ -96,7 +101,8 @@ namespace NSE.WebApp.MVC.Controllers
         }
 
         private static JwtSecurityToken ObterTokenFormatado(string jwtToken)
-            => new JwtSecurityTokenHandler().ReadToken(jwtToken) as JwtSecurityToken;
-
+        {
+            return new JwtSecurityTokenHandler().ReadToken(jwtToken) as JwtSecurityToken;
+        }
     }
 }
