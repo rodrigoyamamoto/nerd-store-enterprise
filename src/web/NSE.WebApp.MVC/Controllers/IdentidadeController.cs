@@ -1,16 +1,24 @@
 ﻿using System;
+using System.Collections.Generic;
+using System.IdentityModel.Tokens.Jwt;
+using System.Security.Claims;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Authentication;
+using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Mvc;
 using NSE.WebApp.MVC.Models;
+using NSE.WebApp.MVC.Services;
 
 namespace NSE.WebApp.MVC.Controllers
 {
     public class IdentidadeController : Controller
     {
-        //public IdentidadeController(IAutenticacaoService autenticacaoService)
-        //{
-        //    //_autenticacaoService = autenticacaoService;
-        //}
+        private readonly IAutenticacaoService _autenticacaoService;
+
+        public IdentidadeController(IAutenticacaoService autenticacaoService)
+        {
+            _autenticacaoService = autenticacaoService;
+        }
 
         [HttpGet]
         [Route("nova-conta")]
@@ -25,11 +33,7 @@ namespace NSE.WebApp.MVC.Controllers
         {
             if (!ModelState.IsValid) return View(usuarioRegistro);
 
-            //var resposta = await _autenticacaoService.Registro(usuarioRegistro);
-
-            //if (ResponsePossuiErros(resposta.ResponseResult)) return View(usuarioRegistro);
-
-            //await RealizarLogin(resposta);
+            var resposta = await _autenticacaoService.Registro(usuarioRegistro);
 
             return RedirectToAction(nameof(Index), "Home");
         }
@@ -44,55 +48,49 @@ namespace NSE.WebApp.MVC.Controllers
 
         [HttpPost]
         [Route("login")]
-        public async Task<IActionResult> Login(UsuarioLogin usuarioLogin, string returnUrl = null)
+        public async Task<IActionResult> Login(UsuarioLogin usuarioLogin)
         {
-            //ViewData["ReturnUrl"] = returnUrl;
             if (!ModelState.IsValid) return View(usuarioLogin);
 
-            //var resposta = await _autenticacaoService.Login(usuarioLogin);
+            var resposta = await _autenticacaoService.Login(usuarioLogin);
 
-            //if (ResponsePossuiErros(resposta.ResponseResult)) return View(usuarioLogin);
+            await RealizarLogin(resposta);
 
-            //await RealizarLogin(resposta);
-
-            //if (string.IsNullOrEmpty(returnUrl)) return RedirectToAction("Index", "Home");
-
-            return LocalRedirect(returnUrl);
+            return RedirectToAction(nameof(Index), "Home");
         }
 
         [HttpGet]
         [Route("sair")]
         public async Task<IActionResult> Logout()
         {
-            //await HttpContext.SignOutAsync(CookieAuthenticationDefaults.AuthenticationScheme);
             return RedirectToAction(nameof(Index), "Home");
         }
 
         private async Task RealizarLogin(UsuarioRespostaLogin resposta)
         {
-            //var token = ObterTokenFormatado(resposta.AccessToken);
+            var token = ObterTokenFormatado(resposta.AccessToken);
 
-            //var claims = new List<Claim>();
-            //claims.Add(new Claim("JWT", resposta.AccessToken));
-            //claims.AddRange(token.Claims);
+            var claims = new List<Claim>();
+            claims.Add(new Claim("JWT", resposta.AccessToken));
+            claims.AddRange(token.Claims);
 
-            //var claimsIdentity = new ClaimsIdentity(claims, CookieAuthenticationDefaults.AuthenticationScheme);
+            var claimsIdentity = new ClaimsIdentity(claims, CookieAuthenticationDefaults.AuthenticationScheme);
 
-            //var authProperties = new AuthenticationProperties
-            //{
-            //    ExpiresUtc = DateTimeOffset.UtcNow.AddMinutes(60),
-            //    IsPersistent = true
-            //};
+            var authProperties = new AuthenticationProperties
+            {
+                ExpiresUtc = DateTimeOffset.UtcNow.AddMinutes(60),
+                IsPersistent = true
+            };
 
-            //await HttpContext.SignInAsync(
-            //    CookieAuthenticationDefaults.AuthenticationScheme,
-            //    new ClaimsPrincipal(claimsIdentity),
-            //    authProperties);
+            await HttpContext.SignInAsync(
+                CookieAuthenticationDefaults.AuthenticationScheme,
+                new ClaimsPrincipal(claimsIdentity),
+                authProperties);
         }
 
-        //private static JwtSecurityToken ObterTokenFormatado(string jwtToken)
-        //{
-        //    //return new JwtSecurityTokenHandler().ReadToken(jwtToken) as JwtSecurityToken;
-        //}
+        private static JwtSecurityToken ObterTokenFormatado(string jwtToken)
+        {
+            return new JwtSecurityTokenHandler().ReadToken(jwtToken) as JwtSecurityToken;
+        }
     }
 }
