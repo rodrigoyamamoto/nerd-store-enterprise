@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace NSE.Core.DomainObjetcs
+namespace NSE.Core.DomainObjects
 {
     public abstract class Entity
     {
