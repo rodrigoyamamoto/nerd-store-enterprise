@@ -2,6 +2,7 @@
 using System.Threading.Tasks;
 using FluentValidation.Results;
 using MediatR;
+using NSE.Clientes.API.Application.Events;
 using NSE.Clientes.API.Models;
 using NSE.Core.Messages;
 
@@ -32,6 +33,8 @@ namespace NSE.Clientes.API.Application.Commands
             }
 
             _clienteRepository.Adicionar(cliente);
+
+            cliente.AdicionarEvento(new ClienteRegistradoEvent(message.Id, message.Nome, message.Email, message.Cpf));
 
             return await PersistirDados(_clienteRepository.UnitOfWork);
         }
