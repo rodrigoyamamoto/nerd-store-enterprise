@@ -23,8 +23,17 @@ namespace NSE.Clientes.API.Application.Commands
                 return message.ValidationResult;
 
             var cliente = new Cliente(message.Id, message.Nome, message.Email, message.Cpf);
+            var clienteExistente = await _clienteRepository.ObterPorCpf(cliente.Cpf.Numero);
 
-            return message.ValidationResult;
+            if (clienteExistente != null)
+            {
+                AdicionarErro("Este CPF já esta em uso.");
+                return ValidationResult;
+            }
+
+            _clienteRepository.Adicionar(cliente);
+
+            return await PersistirDados(_clienteRepository.UnitOfWork);
         }
     }
 }
