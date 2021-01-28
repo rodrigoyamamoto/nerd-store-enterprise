@@ -12,7 +12,15 @@
   </ItemGroup>
 
   <ItemGroup>
+    <Folder Include="Services\" />
+    <Folder Include="Data\" />
+    <Folder Include="Configuration\" />
     <Folder Include="Controllers\" />
+    <Folder Include="Application\" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\..\bulding blocks\NSE.Core\NSE.Core.csproj" />
   </ItemGroup>
 
 
