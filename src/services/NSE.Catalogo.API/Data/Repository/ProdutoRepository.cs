@@ -1,9 +1,9 @@
-﻿using NSE.Catalogo.API.Models;
+﻿using Microsoft.EntityFrameworkCore;
+using NSE.Catalogo.API.Models;
+using NSE.Core.Data;
 using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
-using Microsoft.EntityFrameworkCore;
-using NSE.Core.Data;
 
 namespace NSE.Catalogo.API.Data.Repository
 {

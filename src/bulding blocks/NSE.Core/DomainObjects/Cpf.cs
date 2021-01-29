@@ -70,6 +70,4 @@ namespace NSE.Core.DomainObjects
             return true;
         }
     }
-
-
 }

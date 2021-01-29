@@ -7,7 +7,7 @@ using Microsoft.Extensions.Hosting;
 using NSE.Clientes.API.Data;
 using NSE.WebAPI.Core.Identidade;
 
-namespace NSE.Catalogo.API.Configuration
+namespace NSE.Clientes.API.Configuration
 {
     public static class ApiConfig
     {

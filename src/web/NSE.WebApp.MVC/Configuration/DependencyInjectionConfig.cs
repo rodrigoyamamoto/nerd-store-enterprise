@@ -1,6 +1,4 @@
-﻿using System;
-using System.Net.Http;
-using Microsoft.AspNetCore.Http;
+﻿using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using NSE.WebApp.MVC.Extensions;
@@ -9,6 +7,8 @@ using NSE.WebApp.MVC.Services.Handlers;
 using Polly;
 using Polly.Extensions.Http;
 using Polly.Retry;
+using System;
+using System.Net.Http;
 
 namespace NSE.WebApp.MVC.Configuration
 {
@@ -33,6 +33,7 @@ namespace NSE.WebApp.MVC.Configuration
             services.AddScoped<IUser, AspNetUser>();
 
             #region Refit
+
             //services.AddHttpClient("Refit",
             //        options =>
             //        {
@@ -40,7 +41,8 @@ namespace NSE.WebApp.MVC.Configuration
             //        })
             //        .AddHttpMessageHandler<HttpClientAuthorizationDelegatingHandler>()
             //        .AddTypedClient(Refit.RestService.For<ICatalogoServiceRefit>);
-            #endregion
+
+            #endregion Refit
         }
 
         public class PollyExtensions
