@@ -9,15 +9,15 @@ using NSE.Clientes.API.Models;
 using NSE.Clientes.API.Services;
 using NSE.Core.Mediator;
 
-namespace NSE.Catalogo.API.Configuration
+namespace NSE.Clientes.API.Configuration
 {
     public static class DependencyInjectionConfig
     {
         public static void RegisterServices(this IServiceCollection services)
         {
             services.AddScoped<IMediatorHandler, MediatorHandler>();
-            services.AddScoped<IRequestHandler<RegistrarClienteCommand, ValidationResult>, ClienteCommandHandler>();
 
+            services.AddScoped<IRequestHandler<RegistrarClienteCommand, ValidationResult>, ClienteCommandHandler>();
             services.AddScoped<INotificationHandler<ClienteRegistradoEvent>, ClienteEventHandler>();
 
             services.AddScoped<IClienteRepository, ClienteRepository>();

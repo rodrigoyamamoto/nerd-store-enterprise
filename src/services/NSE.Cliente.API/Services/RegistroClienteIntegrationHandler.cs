@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Net.Http.Headers;
 using System.Threading;
 using System.Threading.Tasks;
 using EasyNetQ;
@@ -9,7 +8,6 @@ using Microsoft.Extensions.Hosting;
 using NSE.Clientes.API.Application.Commands;
 using NSE.Core.Mediator;
 using NSE.Core.Messages.Integration;
-using Swashbuckle.AspNetCore.SwaggerGen;
 
 namespace NSE.Clientes.API.Services
 {
@@ -18,7 +16,7 @@ namespace NSE.Clientes.API.Services
         private IBus _bus;
         private readonly IServiceProvider _serviceProvider;
 
-        public RegistroClienteIntegrationHandler(IBus bus, IServiceProvider serviceProvider)
+        public RegistroClienteIntegrationHandler(IServiceProvider serviceProvider)
         {
             _serviceProvider = serviceProvider;
         }
