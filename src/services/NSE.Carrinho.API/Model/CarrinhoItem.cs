@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Text.Json.Serialization;
 using FluentValidation;
 
 namespace NSE.Carrinho.API.Model
@@ -16,9 +17,9 @@ namespace NSE.Carrinho.API.Model
         public int Quantidade { get; set; }
         public decimal Valor { get; set; }
         public string Imagem { get; set; }
-
         public Guid CarrinhoId { get; set; }
 
+        [JsonIgnore]
         public CarrinhoCliente CarrinhoCliente { get; set; }
 
         internal void AssociarCarrinho(Guid carrinhoId)
