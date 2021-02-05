@@ -41,31 +41,29 @@ namespace NSE.WebApp.MVC.Configuration
 
             #endregion
         }
-    }
 
-    #region PollyExtensions
-
-    public class PollyExtensions
-    {
-        public static AsyncRetryPolicy<HttpResponseMessage> EsperarTentar()
+        #region PollyExtension
+        public static class PollyExtensions
         {
-            var retry = HttpPolicyExtensions
-                .HandleTransientHttpError()
-                .WaitAndRetryAsync(new[]
-                {
+            public static AsyncRetryPolicy<HttpResponseMessage> EsperarTentar()
+            {
+                var retry = HttpPolicyExtensions
+                    .HandleTransientHttpError()
+                    .WaitAndRetryAsync(new[]
+                    {
                         TimeSpan.FromMilliseconds(1),
                         TimeSpan.FromMilliseconds(5),
                         TimeSpan.FromMilliseconds(10),
-                }, (outcome, timespan, retryCount, context) =>
-                {
-                    Console.ForegroundColor = ConsoleColor.Blue;
-                    Console.WriteLine($"Tentando pela {retryCount} vez!");
-                    Console.ForegroundColor = ConsoleColor.White;
-                });
+                    }, (outcome, timespan, retryCount, context) =>
+                    {
+                        Console.ForegroundColor = ConsoleColor.Blue;
+                        Console.WriteLine($"Tentando pela {retryCount} vez");
+                        Console.ForegroundColor = ConsoleColor.White;
+                    });
 
-            return retry;
+                return retry;
+            }
         }
+        #endregion
     }
-
-    #endregion
 }
