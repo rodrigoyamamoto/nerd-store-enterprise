@@ -1,6 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
-using NSE.WebApp.MVC.Models;
 using System.Linq;
+using NSE.Core.Communication;
 
 namespace NSE.WebApp.MVC.Controllers
 {

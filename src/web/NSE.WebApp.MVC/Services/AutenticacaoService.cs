@@ -4,6 +4,7 @@ using NSE.WebApp.MVC.Models;
 using System;
 using System.Net.Http;
 using System.Threading.Tasks;
+using NSE.Core.Communication;
 
 namespace NSE.WebApp.MVC.Services
 {
