@@ -38,10 +38,10 @@ namespace NSE.Bff.Compras.Services
         public async Task<ResponseResult> AdicionarItemCarrinho(ItemCarrinhoDTO produto)
         {
             var itemContent = ObterConteudo(produto);
+
             var response = await _httpClient.PostAsync("/carrinho/", itemContent);
 
-            if (!TratarErrosResponse(response))
-                return await DeserializarObjetoResponse<ResponseResult>(response);
+            if (!TratarErrosResponse(response)) return await DeserializarObjetoResponse<ResponseResult>(response);
 
             return RetornoOk();
         }
@@ -49,10 +49,10 @@ namespace NSE.Bff.Compras.Services
         public async Task<ResponseResult> AtualizarItemCarrinho(Guid produtoId, ItemCarrinhoDTO carrinho)
         {
             var itemContent = ObterConteudo(carrinho);
-            var response = await _httpClient.PostAsync($"/carrinho/{carrinho.ProdutoId}", itemContent);
 
-            if (!TratarErrosResponse(response))
-                return await DeserializarObjetoResponse<ResponseResult>(response);
+            var response = await _httpClient.PutAsync($"/carrinho/{carrinho.ProdutoId}", itemContent);
+
+            if (!TratarErrosResponse(response)) return await DeserializarObjetoResponse<ResponseResult>(response);
 
             return RetornoOk();
         }
@@ -61,8 +61,7 @@ namespace NSE.Bff.Compras.Services
         {
             var response = await _httpClient.DeleteAsync($"/carrinho/{produtoId}");
 
-            if (!TratarErrosResponse(response))
-                return await DeserializarObjetoResponse<ResponseResult>(response);
+            if (!TratarErrosResponse(response)) return await DeserializarObjetoResponse<ResponseResult>(response);
 
             return RetornoOk();
         }

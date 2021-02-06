@@ -6,7 +6,7 @@ namespace NSE.WebApp.MVC.Controllers
     public class HomeController : Controller
     {
         [Route("sistema-indisponivel")]
-        public IActionResult SistemIndisponivel()
+        public IActionResult SistemaIndisponivel()
         {
             var modelErro = new ErrorViewModel
             {
@@ -16,11 +16,6 @@ namespace NSE.WebApp.MVC.Controllers
             };
 
             return View("Error", modelErro);
-        }
-
-        public IActionResult Index()
-        {
-            return View();
         }
 
         public IActionResult Privacy()
