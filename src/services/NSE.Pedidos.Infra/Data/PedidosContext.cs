@@ -1,12 +1,12 @@
-﻿using System.Linq;
-using System.Threading.Tasks;
-using FluentValidation.Results;
+﻿using FluentValidation.Results;
 using Microsoft.EntityFrameworkCore;
 using NSE.Core.Data;
 using NSE.Core.DomainObjects;
 using NSE.Core.Mediator;
 using NSE.Core.Messages;
 using NSE.Pedidos.Domain.Vouchers;
+using System.Linq;
+using System.Threading.Tasks;
 
 namespace NSE.Pedidos.Infra.Data
 {

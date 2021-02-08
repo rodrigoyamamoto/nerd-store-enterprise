@@ -1,9 +1,9 @@
 ﻿using FluentValidation.Results;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.ModelBinding;
+using NSE.Core.Communication;
 using System.Collections.Generic;
 using System.Linq;
-using NSE.Core.Communication;
 
 namespace NSE.WebAPI.Core.Controllers
 {

@@ -1,9 +1,9 @@
-﻿using System;
-using System.Net.Http;
-using System.Threading.Tasks;
-using Microsoft.Extensions.Options;
+﻿using Microsoft.Extensions.Options;
 using NSE.Bff.Compras.Extensions;
 using NSE.Bff.Compras.Models;
+using System;
+using System.Net.Http;
+using System.Threading.Tasks;
 
 namespace NSE.Bff.Compras.Services
 {

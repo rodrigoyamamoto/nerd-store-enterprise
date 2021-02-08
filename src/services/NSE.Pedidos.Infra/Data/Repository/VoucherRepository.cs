@@ -1,7 +1,7 @@
-﻿using System.Threading.Tasks;
-using Microsoft.EntityFrameworkCore;
+﻿using Microsoft.EntityFrameworkCore;
 using NSE.Core.Data;
 using NSE.Pedidos.Domain.Vouchers;
+using System.Threading.Tasks;
 
 namespace NSE.Pedidos.Infra.Data.Repository
 {
@@ -25,6 +25,7 @@ namespace NSE.Pedidos.Infra.Data.Repository
         {
             _context.Vouchers.Update(voucher);
         }
+
         public void Dispose()
         {
             _context.Dispose();

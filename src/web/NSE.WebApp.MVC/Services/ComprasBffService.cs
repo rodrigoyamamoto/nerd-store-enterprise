@@ -1,19 +1,23 @@
-﻿using System;
-using System.Net.Http;
-using System.Threading.Tasks;
-using Microsoft.Extensions.Options;
+﻿using Microsoft.Extensions.Options;
 using NSE.Core.Communication;
 using NSE.WebApp.MVC.Extensions;
 using NSE.WebApp.MVC.Models;
+using System;
+using System.Net.Http;
+using System.Threading.Tasks;
 
 namespace NSE.WebApp.MVC.Services
 {
     public interface IComprasBffService
     {
         Task<CarrinhoViewModel> ObterCarrinho();
+
         Task<int> ObterQuantidadeCarrinho();
+
         Task<ResponseResult> AdicionarItemCarrinho(ItemCarrinhoViewModel carrinho);
+
         Task<ResponseResult> AtualizarItemCarrinho(Guid produtoId, ItemCarrinhoViewModel carrinho);
+
         Task<ResponseResult> RemoverItemCarrinho(Guid produtoId);
     }
 

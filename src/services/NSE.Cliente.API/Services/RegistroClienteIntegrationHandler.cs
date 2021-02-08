@@ -1,13 +1,13 @@
-﻿using System;
-using System.Threading;
-using System.Threading.Tasks;
-using FluentValidation.Results;
+﻿using FluentValidation.Results;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using NSE.Clientes.API.Application.Commands;
 using NSE.Core.Mediator;
 using NSE.Core.Messages.Integration;
 using NSE.MessageBus;
+using System;
+using System.Threading;
+using System.Threading.Tasks;
 
 namespace NSE.Clientes.API.Services
 {

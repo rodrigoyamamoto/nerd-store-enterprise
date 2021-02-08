@@ -1,16 +1,17 @@
 ﻿using Microsoft.Extensions.Options;
+using NSE.Core.Communication;
 using NSE.WebApp.MVC.Extensions;
 using NSE.WebApp.MVC.Models;
 using System;
 using System.Net.Http;
 using System.Threading.Tasks;
-using NSE.Core.Communication;
 
 namespace NSE.WebApp.MVC.Services
 {
     public interface IAutenticacaoService
     {
         Task<UsuarioRespostaLogin> Login(UsuarioLogin usuarioLogin);
+
         Task<UsuarioRespostaLogin> Registro(UsuarioRegistro usuarioRegistro);
     }
 

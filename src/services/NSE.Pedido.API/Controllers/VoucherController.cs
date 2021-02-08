@@ -6,6 +6,5 @@ namespace NSE.Pedidos.API.Controllers
     [Authorize]
     public class VoucherController : MainController
     {
-
     }
 }

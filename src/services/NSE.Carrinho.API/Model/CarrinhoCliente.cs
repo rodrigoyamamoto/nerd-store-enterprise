@@ -1,8 +1,8 @@
-﻿using System;
+﻿using FluentValidation;
+using FluentValidation.Results;
+using System;
 using System.Collections.Generic;
 using System.Linq;
-using FluentValidation;
-using FluentValidation.Results;
 
 namespace NSE.Carrinho.API.Model
 {
@@ -15,13 +15,16 @@ namespace NSE.Carrinho.API.Model
         public decimal ValorTotal { get; set; }
         public List<CarrinhoItem> Itens { get; set; } = new List<CarrinhoItem>();
         public ValidationResult ValidationResult { get; set; }
+
         public CarrinhoCliente(Guid clienteId)
         {
             Id = Guid.NewGuid();
             ClienteId = clienteId;
         }
 
-        public CarrinhoCliente() { }
+        public CarrinhoCliente()
+        {
+        }
 
         internal void CalcularValorCarrinho()
         {

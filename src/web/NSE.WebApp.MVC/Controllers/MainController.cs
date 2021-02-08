@@ -1,6 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
-using System.Linq;
 using NSE.Core.Communication;
+using System.Linq;
 
 namespace NSE.WebApp.MVC.Controllers
 {
@@ -20,6 +20,7 @@ namespace NSE.WebApp.MVC.Controllers
 
             return false;
         }
+
         protected void AdicionarErroValidacao(string mensagem)
         {
             ModelState.AddModelError(string.Empty, mensagem);

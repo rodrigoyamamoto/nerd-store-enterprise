@@ -1,6 +1,8 @@
 ﻿using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Mvc.DataAnnotations;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using NSE.WebAPI.Core.Usuario;
 using NSE.WebApp.MVC.Extensions;
 using NSE.WebApp.MVC.Services;
 using NSE.WebApp.MVC.Services.Handlers;
@@ -9,8 +11,6 @@ using Polly.Extensions.Http;
 using Polly.Retry;
 using System;
 using System.Net.Http;
-using Microsoft.AspNetCore.Mvc.DataAnnotations;
-using NSE.WebAPI.Core.Usuario;
 
 namespace NSE.WebApp.MVC.Configuration
 {
@@ -39,10 +39,11 @@ namespace NSE.WebApp.MVC.Configuration
                 .AddTransientHttpErrorPolicy(
                     p => p.CircuitBreakerAsync(5, TimeSpan.FromSeconds(30)));
 
-            #endregion
+            #endregion HttpServices
         }
 
         #region PollyExtension
+
         public static class PollyExtensions
         {
             public static AsyncRetryPolicy<HttpResponseMessage> EsperarTentar()
@@ -64,6 +65,7 @@ namespace NSE.WebApp.MVC.Configuration
                 return retry;
             }
         }
-        #endregion
+
+        #endregion PollyExtension
     }
 }
