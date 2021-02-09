@@ -84,7 +84,7 @@ namespace NSE.WebApp.MVC.Services
         {
             var itemContent = ObterConteudo(voucher);
 
-            var response = await _httpClient.PostAsync($"/compras/carrinho/aplicar-voucher/{voucher}", itemContent);
+            var response = await _httpClient.PostAsync($"/compras/carrinho/aplicar-voucher/", itemContent);
 
             if (!TratarErrosResponse(response)) return await DeserializarObjetoResponse<ResponseResult>(response);
 
