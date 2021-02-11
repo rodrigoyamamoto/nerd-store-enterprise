@@ -39,7 +39,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "NSE.Catalogo.API", "src\ser
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "NSE.Clientes.API", "src\services\NSE.Cliente.API\NSE.Clientes.API.csproj", "{E36C898C-3342-44B7-A48B-A990997B3FBB}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "NSE.Pagamento.API", "src\services\NSE.Pagamento.API\NSE.Pagamento.API.csproj", "{269FA2F9-2FB5-4EF4-B0FD-8B39568EA0F2}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "NSE.Pagamentos.API", "src\services\NSE.Pagamento.API\NSE.Pagamentos.API.csproj", "{269FA2F9-2FB5-4EF4-B0FD-8B39568EA0F2}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "NSE.Pedidos.API", "src\services\NSE.Pedidos.API\NSE.Pedidos.API.csproj", "{4B0D1289-901D-4DB7-B4B7-F82BECE6A36D}"
 EndProject
@@ -55,11 +55,13 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "ApiGateways", "ApiGateways"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Compras", "Compras", "{DD6DB1E4-12FE-4780-995F-BE59A20509CC}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NSE.Bff.Compras", "src\api gateways\NSE.Bff.Compras\NSE.Bff.Compras.csproj", "{267907AC-AAE1-4F0C-AD21-3CF73FABE15B}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "NSE.Bff.Compras", "src\api gateways\NSE.Bff.Compras\NSE.Bff.Compras.csproj", "{267907AC-AAE1-4F0C-AD21-3CF73FABE15B}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NSE.Pedidos.Domain", "src\services\NSE.Pedidos.Domain\NSE.Pedidos.Domain.csproj", "{4FF27E9A-97B2-47E3-B63B-5119AE068928}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "NSE.Pedidos.Domain", "src\services\NSE.Pedidos.Domain\NSE.Pedidos.Domain.csproj", "{4FF27E9A-97B2-47E3-B63B-5119AE068928}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NSE.Pedidos.Infra", "src\services\NSE.Pedidos.Infra\NSE.Pedidos.Infra.csproj", "{370DF3DF-3E13-4E53-B2E9-F8B541DFDF12}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "NSE.Pedidos.Infra", "src\services\NSE.Pedidos.Infra\NSE.Pedidos.Infra.csproj", "{370DF3DF-3E13-4E53-B2E9-F8B541DFDF12}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NSE.Pagamentos.NerdsPag", "src\services\NSE.Pagamento.NerdsPag\NSE.Pagamentos.NerdsPag.csproj", "{19EC35E1-C4DB-4725-BDDF-8CD7C48583B6}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -119,6 +121,10 @@ Global
 		{370DF3DF-3E13-4E53-B2E9-F8B541DFDF12}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{370DF3DF-3E13-4E53-B2E9-F8B541DFDF12}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{370DF3DF-3E13-4E53-B2E9-F8B541DFDF12}.Release|Any CPU.Build.0 = Release|Any CPU
+		{19EC35E1-C4DB-4725-BDDF-8CD7C48583B6}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{19EC35E1-C4DB-4725-BDDF-8CD7C48583B6}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{19EC35E1-C4DB-4725-BDDF-8CD7C48583B6}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{19EC35E1-C4DB-4725-BDDF-8CD7C48583B6}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -152,6 +158,7 @@ Global
 		{267907AC-AAE1-4F0C-AD21-3CF73FABE15B} = {DD6DB1E4-12FE-4780-995F-BE59A20509CC}
 		{4FF27E9A-97B2-47E3-B63B-5119AE068928} = {0E1B961F-16FD-45D7-9A88-4DFBF5D59E6F}
 		{370DF3DF-3E13-4E53-B2E9-F8B541DFDF12} = {0E1B961F-16FD-45D7-9A88-4DFBF5D59E6F}
+		{19EC35E1-C4DB-4725-BDDF-8CD7C48583B6} = {87299EBF-BDDC-4CB8-ACA4-2EC3DAD6B2EE}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {49FEF802-5890-4EA3-A4B5-DE226AE6E6FF}
