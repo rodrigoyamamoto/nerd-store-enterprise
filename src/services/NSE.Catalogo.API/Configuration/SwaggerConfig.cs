@@ -1,7 +1,7 @@
-﻿using Microsoft.AspNetCore.Builder;
+﻿using System;
+using Microsoft.AspNetCore.Builder;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.OpenApi.Models;
-using System;
 
 namespace NSE.Catalogo.API.Configuration
 {
@@ -15,12 +15,13 @@ namespace NSE.Catalogo.API.Configuration
                 {
                     Title = "NerdStore Enterprise Catálogo API",
                     Description = "Esta API faz parte do curso ASP.NET Core Enterprise Applications.",
+                    Contact = new OpenApiContact() { Name = "Eduardo Pires", Email = "contato@desenvolvedor.io" },
                     License = new OpenApiLicense() { Name = "MIT", Url = new Uri("https://opensource.org/licenses/MIT") }
                 });
 
                 c.AddSecurityDefinition("Bearer", new OpenApiSecurityScheme
                 {
-                    Description = "Insira o token JWT desta maneira: Bearar {seu token}",
+                    Description = "Insira o token JWT desta maneira: Bearer {seu token}",
                     Name = "Authorization",
                     Scheme = "Bearer",
                     BearerFormat = "JWT",
@@ -36,12 +37,13 @@ namespace NSE.Catalogo.API.Configuration
                             Reference = new OpenApiReference
                             {
                                 Type = ReferenceType.SecurityScheme,
-                                Id="Bearer"
+                                Id = "Bearer"
                             }
                         },
-                        new string[]{}
-                     }
+                        new string[] {}
+                    }
                 });
+
             });
         }
 

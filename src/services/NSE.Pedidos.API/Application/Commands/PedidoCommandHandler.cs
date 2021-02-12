@@ -8,9 +8,9 @@ using NSE.Core.Messages.Integration;
 using NSE.MessageBus;
 using NSE.Pedidos.API.Application.DTO;
 using NSE.Pedidos.API.Application.Events;
+using NSE.Pedidos.Domain;
 using NSE.Pedidos.Domain.Pedidos;
-using NSE.Pedidos.Domain.Vouchers;
-using NSE.Pedidos.Domain.Vouchers.Specs;
+using NSE.Pedidos.Domain.Specs;
 
 namespace NSE.Pedidos.API.Application.Commands
 {
@@ -21,8 +21,8 @@ namespace NSE.Pedidos.API.Application.Commands
         private readonly IVoucherRepository _voucherRepository;
         private readonly IMessageBus _bus;
 
-        public PedidoCommandHandler(IVoucherRepository voucherRepository,
-                                    IPedidoRepository pedidoRepository,
+        public PedidoCommandHandler(IVoucherRepository voucherRepository, 
+                                    IPedidoRepository pedidoRepository, 
                                     IMessageBus bus)
         {
             _voucherRepository = voucherRepository;
@@ -144,7 +144,7 @@ namespace NSE.Pedidos.API.Application.Commands
 
             var result = await _bus
                 .RequestAsync<PedidoIniciadoIntegrationEvent, ResponseMessage>(pedidoIniciado);
-
+            
             if (result.ValidationResult.IsValid) return true;
 
             foreach (var erro in result.ValidationResult.Errors)

@@ -1,9 +1,10 @@
-﻿using NSE.Core.Communication;
-using NSE.WebApp.MVC.Extensions;
-using System.Net.Http;
+﻿using System.Net.Http;
 using System.Text;
 using System.Text.Json;
 using System.Threading.Tasks;
+using NSE.Core.Communication;
+using NSE.WebApp.MVC.Extensions;
+using NSE.WebApp.MVC.Models;
 
 namespace NSE.WebApp.MVC.Services
 {
@@ -11,8 +12,10 @@ namespace NSE.WebApp.MVC.Services
     {
         protected StringContent ObterConteudo(object dado)
         {
-            return new StringContent(JsonSerializer.Serialize(dado),
-                Encoding.UTF8, "application/json");
+            return new StringContent(
+                JsonSerializer.Serialize(dado),
+                Encoding.UTF8,
+                "application/json");
         }
 
         protected async Task<T> DeserializarObjetoResponse<T>(HttpResponseMessage responseMessage)

@@ -1,10 +1,10 @@
-﻿using FluentValidation.Results;
-using Microsoft.EntityFrameworkCore;
+﻿using Microsoft.EntityFrameworkCore;
+using System.Linq;
 using NSE.Catalogo.API.Models;
 using NSE.Core.Data;
-using NSE.Core.Messages;
-using System.Linq;
 using System.Threading.Tasks;
+using FluentValidation.Results;
+using NSE.Core.Messages;
 
 namespace NSE.Catalogo.API.Data
 {
@@ -14,7 +14,7 @@ namespace NSE.Catalogo.API.Data
             : base(options) { }
 
         public DbSet<Produto> Produtos { get; set; }
-
+        
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             modelBuilder.Ignore<ValidationResult>();

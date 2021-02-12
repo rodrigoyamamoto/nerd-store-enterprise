@@ -1,7 +1,7 @@
-﻿using FluentValidation.Results;
+﻿using System.Linq;
+using FluentValidation.Results;
 using Microsoft.EntityFrameworkCore;
 using NSE.Carrinho.API.Model;
-using System.Linq;
 
 namespace NSE.Carrinho.API.Data
 {
@@ -53,10 +53,7 @@ namespace NSE.Carrinho.API.Data
                 .HasForeignKey(c => c.CarrinhoId);
 
             foreach (var relationship in modelBuilder.Model.GetEntityTypes()
-                .SelectMany(e => e.GetForeignKeys()))
-            {
-                relationship.DeleteBehavior = DeleteBehavior.Cascade;
-            }
+                .SelectMany(e => e.GetForeignKeys())) relationship.DeleteBehavior = DeleteBehavior.Cascade;
         }
     }
 }

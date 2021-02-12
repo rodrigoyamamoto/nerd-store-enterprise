@@ -1,7 +1,8 @@
-﻿using Microsoft.AspNetCore.Http;
-using Polly.CircuitBreaker;
-using System.Net;
+﻿using System.Net;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Http;
+using Polly.CircuitBreaker;
+using Refit;
 
 namespace NSE.WebApp.MVC.Extensions
 {
@@ -21,6 +22,14 @@ namespace NSE.WebApp.MVC.Extensions
                 await _next(httpContext);
             }
             catch (CustomHttpRequestException ex)
+            {
+                HandleRequestExceptionAsync(httpContext, ex.StatusCode);
+            }
+            catch (ValidationApiException ex)
+            {
+                HandleRequestExceptionAsync(httpContext, ex.StatusCode);
+            }
+            catch (ApiException ex)
             {
                 HandleRequestExceptionAsync(httpContext, ex.StatusCode);
             }

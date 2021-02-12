@@ -30,15 +30,21 @@ namespace NSE.Catalogo.API
 
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddSwaggerConfiguration();
             services.AddApiConfiguration(Configuration);
+
+            services.AddMessageBusConfiguration(Configuration);
+
             services.AddJwtConfiguration(Configuration);
+
+            services.AddSwaggerConfiguration();
+
             services.RegisterServices();
         }
 
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
         {
             app.UseSwaggerConfiguration();
+
             app.UseApiConfiguration(env);
         }
     }

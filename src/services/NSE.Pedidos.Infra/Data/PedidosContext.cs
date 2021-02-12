@@ -1,13 +1,13 @@
 ﻿using System;
+using System.Linq;
+using System.Threading.Tasks;
 using FluentValidation.Results;
 using Microsoft.EntityFrameworkCore;
 using NSE.Core.Data;
 using NSE.Core.DomainObjects;
 using NSE.Core.Mediator;
 using NSE.Core.Messages;
-using NSE.Pedidos.Domain.Vouchers;
-using System.Linq;
-using System.Threading.Tasks;
+using NSE.Pedidos.Domain;
 using NSE.Pedidos.Domain.Pedidos;
 
 namespace NSE.Pedidos.Infra.Data
@@ -21,6 +21,7 @@ namespace NSE.Pedidos.Infra.Data
         {
             _mediatorHandler = mediatorHandler;
         }
+
 
         public DbSet<Pedido> Pedidos { get; set; }
         public DbSet<PedidoItem> PedidoItems { get; set; }
@@ -62,8 +63,7 @@ namespace NSE.Pedidos.Infra.Data
             }
 
             var sucesso = await base.SaveChangesAsync() > 0;
-            if (sucesso)
-                await _mediatorHandler.PublicarEventos(this);
+            if (sucesso) await _mediatorHandler.PublicarEventos(this);
 
             return sucesso;
         }
@@ -85,8 +85,7 @@ namespace NSE.Pedidos.Infra.Data
                 .ForEach(entity => entity.Entity.LimparEventos());
 
             var tasks = domainEvents
-                .Select(async (domainEvent) =>
-                {
+                .Select(async (domainEvent) => {
                     await mediator.PublicarEvento(domainEvent);
                 });
 

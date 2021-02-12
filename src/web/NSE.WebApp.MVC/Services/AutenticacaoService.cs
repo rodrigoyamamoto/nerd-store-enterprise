@@ -1,10 +1,10 @@
-﻿using Microsoft.Extensions.Options;
+﻿using System;
+using System.Net.Http;
+using System.Threading.Tasks;
+using Microsoft.Extensions.Options;
 using NSE.Core.Communication;
 using NSE.WebApp.MVC.Extensions;
 using NSE.WebApp.MVC.Models;
-using System;
-using System.Net.Http;
-using System.Threading.Tasks;
 
 namespace NSE.WebApp.MVC.Services
 {
@@ -19,10 +19,12 @@ namespace NSE.WebApp.MVC.Services
     {
         private readonly HttpClient _httpClient;
 
-        public AutenticacaoService(HttpClient httpClient, IOptions<AppSettings> settings)
+        public AutenticacaoService(HttpClient httpClient, 
+                                   IOptions<AppSettings> settings)
         {
-            _httpClient = httpClient;
             httpClient.BaseAddress = new Uri(settings.Value.AutenticacaoUrl);
+
+            _httpClient = httpClient;
         }
 
         public async Task<UsuarioRespostaLogin> Login(UsuarioLogin usuarioLogin)

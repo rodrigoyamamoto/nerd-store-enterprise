@@ -1,8 +1,8 @@
-﻿using FluentValidation;
-using FluentValidation.Results;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using FluentValidation;
+using FluentValidation.Results;
 
 namespace NSE.Carrinho.API.Model
 {
@@ -15,8 +15,10 @@ namespace NSE.Carrinho.API.Model
         public decimal ValorTotal { get; set; }
         public List<CarrinhoItem> Itens { get; set; } = new List<CarrinhoItem>();
         public ValidationResult ValidationResult { get; set; }
+
         public bool VoucherUtilizado { get; set; }
         public decimal Desconto { get; set; }
+
         public Voucher Voucher { get; set; }
 
         public CarrinhoCliente(Guid clienteId)
@@ -25,15 +27,19 @@ namespace NSE.Carrinho.API.Model
             ClienteId = clienteId;
         }
 
-        public CarrinhoCliente()
-        {
-        }
+        public CarrinhoCliente() { }
 
         public void AplicarVoucher(Voucher voucher)
         {
             Voucher = voucher;
             VoucherUtilizado = true;
             CalcularValorCarrinho();
+        }
+
+        internal void CalcularValorCarrinho()
+        {
+            ValorTotal = Itens.Sum(p => p.CalcularValor());
+            CalcularValorTotalDesconto();
         }
 
         private void CalcularValorTotalDesconto()
@@ -62,12 +68,6 @@ namespace NSE.Carrinho.API.Model
 
             ValorTotal = valor < 0 ? 0 : valor;
             Desconto = desconto;
-        }
-
-        internal void CalcularValorCarrinho()
-        {
-            ValorTotal = Itens.Sum(p => p.CalcularValor());
-            CalcularValorTotalDesconto();
         }
 
         internal bool CarrinhoItemExistente(CarrinhoItem item)
@@ -123,10 +123,7 @@ namespace NSE.Carrinho.API.Model
 
         internal bool EhValido()
         {
-            var erros = Itens
-                .SelectMany(i => new CarrinhoItem.ItemCarrinhoValidation()
-                    .Validate(i).Errors).ToList();
-
+            var erros = Itens.SelectMany(i => new CarrinhoItem.ItemCarrinhoValidation().Validate(i).Errors).ToList();
             erros.AddRange(new CarrinhoClienteValidation().Validate(this).Errors);
             ValidationResult = new ValidationResult(erros);
 
@@ -152,3 +149,5 @@ namespace NSE.Carrinho.API.Model
         }
     }
 }
+
+

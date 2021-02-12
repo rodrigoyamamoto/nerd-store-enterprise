@@ -30,7 +30,9 @@ namespace NSE.WebApp.MVC
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddIdentityConfiguration();
+
             services.AddMvcConfiguration(Configuration);
+
             services.RegisterServices(Configuration);
         }
 
