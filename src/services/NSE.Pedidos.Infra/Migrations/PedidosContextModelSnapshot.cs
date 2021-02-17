@@ -15,7 +15,7 @@ namespace NSE.Pedidos.Infra.Migrations
         {
 #pragma warning disable 612, 618
             modelBuilder
-                .HasAnnotation("ProductVersion", "3.1.4")
+                .HasAnnotation("ProductVersion", "3.1.11")
                 .HasAnnotation("Relational:MaxIdentifierLength", 128)
                 .HasAnnotation("Relational:Sequence:.MinhaSequencia", "'MinhaSequencia', '', '1000', '1', '', '', 'Int32', 'False'")
                 .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
@@ -91,7 +91,7 @@ namespace NSE.Pedidos.Infra.Migrations
                     b.ToTable("PedidoItems");
                 });
 
-            modelBuilder.Entity("NSE.Pedidos.Domain.Voucher", b =>
+            modelBuilder.Entity("NSE.Pedidos.Domain.Vouchers.Voucher", b =>
                 {
                     b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
@@ -135,7 +135,7 @@ namespace NSE.Pedidos.Infra.Migrations
 
             modelBuilder.Entity("NSE.Pedidos.Domain.Pedidos.Pedido", b =>
                 {
-                    b.HasOne("NSE.Pedidos.Domain.Voucher", "Voucher")
+                    b.HasOne("NSE.Pedidos.Domain.Vouchers.Voucher", "Voucher")
                         .WithMany()
                         .HasForeignKey("VoucherId");
 

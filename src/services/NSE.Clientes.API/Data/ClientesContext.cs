@@ -1,4 +1,5 @@
-﻿using System.Linq;
+﻿using System;
+using System.Linq;
 using System.Threading.Tasks;
 using FluentValidation.Results;
 using Microsoft.EntityFrameworkCore;
@@ -42,10 +43,21 @@ namespace NSE.Clientes.API.Data
 
         public async Task<bool> Commit()
         {
-            var sucesso = await base.SaveChangesAsync() > 0;
-            if (sucesso) await _mediatorHandler.PublicarEventos(this);
+            try
+            {
+                var sucesso = await base.SaveChangesAsync() > 0;
+                if (sucesso) await _mediatorHandler.PublicarEventos(this);
 
-            return sucesso;
+                return sucesso;
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e);
+                throw;
+            }
+
+
+            //return sucesso;
         }
     }
 
@@ -65,7 +77,8 @@ namespace NSE.Clientes.API.Data
                 .ForEach(entity => entity.Entity.LimparEventos());
 
             var tasks = domainEvents
-                .Select(async (domainEvent) => {
+                .Select(async (domainEvent) =>
+                {
                     await mediator.PublicarEvento(domainEvent);
                 });
 

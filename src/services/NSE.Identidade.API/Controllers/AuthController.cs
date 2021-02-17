@@ -173,7 +173,7 @@ namespace NSE.Identidade.API.Controllers
             }
             catch (Exception ex)
             {
-                Console.WriteLine(ex.StackTrace);
+                Console.WriteLine(ex.GetBaseException());
                 await _userManager.DeleteAsync(usuario);
                 throw;
             }

@@ -77,10 +77,10 @@ namespace NSE.MessageBus
 
         private void TryConnect()
         {
-            if(IsConnected) return;
+            if (IsConnected) return;
 
             var policy = Policy.Handle<EasyNetQException>()
-                .Or<BrokerUnreachableException>()
+            .Or<BrokerUnreachableException>()
                 .WaitAndRetry(3, retryAttempt =>
                     TimeSpan.FromSeconds(Math.Pow(2, retryAttempt)));
 
@@ -95,7 +95,7 @@ namespace NSE.MessageBus
         private void OnDisconnect(object s, EventArgs e)
         {
             var policy = Policy.Handle<EasyNetQException>()
-                .Or<BrokerUnreachableException>()
+            .Or<BrokerUnreachableException>()
                 .RetryForever();
 
             policy.Execute(TryConnect);

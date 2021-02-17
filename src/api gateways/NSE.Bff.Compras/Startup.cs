@@ -4,7 +4,6 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using NSE.Bff.Compras.Configuration;
-using NSE.Bff.Compras.Configuration.Configuration;
 using NSE.WebAPI.Core.Identidade;
 
 namespace NSE.Bff.Compras

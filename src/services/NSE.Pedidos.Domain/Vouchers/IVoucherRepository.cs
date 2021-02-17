@@ -1,7 +1,7 @@
 ﻿using System.Threading.Tasks;
 using NSE.Core.Data;
 
-namespace NSE.Pedidos.Domain
+namespace NSE.Pedidos.Domain.Vouchers
 {
     public interface IVoucherRepository : IRepository<Voucher>
     {

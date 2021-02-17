@@ -1,6 +1,6 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
-using NSE.Pedidos.Domain;
+using NSE.Pedidos.Domain.Vouchers;
 
 namespace NSE.Pedidos.Infra.Data.Mappings
 {
