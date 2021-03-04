@@ -29,8 +29,6 @@ namespace NSE.Pagamentos.API.Services
                 await AutorizarPagamento(request));
         }
 
-
-
         protected override Task ExecuteAsync(CancellationToken stoppingToken)
         {
             SetResponder();
@@ -39,18 +37,23 @@ namespace NSE.Pagamentos.API.Services
 
         private async Task<ResponseMessage> AutorizarPagamento(PedidoIniciadoIntegrationEvent message)
         {
-            using var scope = _serviceProvider.CreateScope();
-            var pagamentoService = scope.ServiceProvider.GetRequiredService<IPagamentoService>();
-            var pagamento = new Pagamento
-            {
-                PedidoId = message.PedidoId,
-                TipoPagamento = (TipoPagamento)message.TipoPagamento,
-                Valor = message.Valor,
-                CartaoCredito = new CartaoCredito(
-                    message.NomeCartao, message.NumeroCartao, message.MesAnoVencimento, message.CVV)
-            };
+            ResponseMessage response;
 
-            var response = await pagamentoService.AutorizarPagamento(pagamento);
+            using (var scope = _serviceProvider.CreateScope())
+            {
+                var pagamentoService = scope.ServiceProvider.GetRequiredService<IPagamentoService>();
+
+                var pagamento = new Pagamento
+                {
+                    PedidoId = message.PedidoId,
+                    TipoPagamento = (TipoPagamento)message.TipoPagamento,
+                    Valor = message.Valor,
+                    CartaoCredito = new CartaoCredito(
+                        message.NomeCartao, message.NumeroCartao, message.MesAnoVencimento, message.CVV)
+                };
+
+                response = await pagamentoService.AutorizarPagamento(pagamento);
+            }
 
             return response;
         }

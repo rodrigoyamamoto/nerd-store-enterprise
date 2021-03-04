@@ -3,7 +3,6 @@ using Microsoft.Extensions.DependencyInjection;
 using NSE.Core.Utils;
 using NSE.MessageBus;
 
-
 namespace NSE.Identidade.API.Configuration
 {
     public static class MessageBusConfig

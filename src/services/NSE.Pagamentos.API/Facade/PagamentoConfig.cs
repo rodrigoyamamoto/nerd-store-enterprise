@@ -1,4 +1,4 @@
-﻿namespace NSE.Pagamentos.Facade
+﻿namespace NSE.Pagamentos.API.Facade
 {
     public class PagamentoConfig
     {

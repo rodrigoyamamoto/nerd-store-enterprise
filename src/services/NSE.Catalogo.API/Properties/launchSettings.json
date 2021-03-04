@@ -15,8 +15,8 @@
       "environmentVariables": {
         "ASPNETCORE_ENVIRONMENT": "Development"
       },
-      "sqlDebugging": true,
-      "nativeDebugging": true
+      "sqlDebugging": false,
+      "nativeDebugging": false
     },
     "IIS - Staging": {
       "commandName": "IISExpress",

@@ -5,6 +5,7 @@ using System.Linq;
 using System.Security.Claims;
 using System.Text;
 using System.Threading.Tasks;
+using EasyNetQ;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Options;
@@ -25,6 +26,7 @@ namespace NSE.Identidade.API.Controllers
         private readonly AppSettings _appSettings;
 
         private readonly IMessageBus _bus;
+        private IBus _ibus;
 
         public AuthController(SignInManager<IdentityUser> signInManager,
                               UserManager<IdentityUser> userManager,
@@ -171,9 +173,8 @@ namespace NSE.Identidade.API.Controllers
             {
                 return await _bus.RequestAsync<UsuarioRegistradoIntegrationEvent, ResponseMessage>(usuarioRegistrado);
             }
-            catch (Exception ex)
+            catch
             {
-                Console.WriteLine(ex.GetBaseException());
                 await _userManager.DeleteAsync(usuario);
                 throw;
             }
