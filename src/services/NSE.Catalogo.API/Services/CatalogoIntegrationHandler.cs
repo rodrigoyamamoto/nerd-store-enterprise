@@ -30,8 +30,8 @@ namespace NSE.Catalogo.API.Services
 
         private void SetSubscribers()
         {
-            _bus.SubscribeAsync<PedidoAutorizadoIntegrationEvent>("PedidoAutorizado",
-                async request => await BaixarEstoque(request));
+            _bus.SubscribeAsync<PedidoAutorizadoIntegrationEvent>("PedidoAutorizado", async request =>
+                await BaixarEstoque(request));
         }
 
         private async Task BaixarEstoque(PedidoAutorizadoIntegrationEvent message)
@@ -52,9 +52,8 @@ namespace NSE.Catalogo.API.Services
 
                 foreach (var produto in produtos)
                 {
-                    var quantidadeProduto = message.Itens
-                        .FirstOrDefault(p => p.Key == produto.Id).Value;
-
+                    var quantidadeProduto = message.Itens.FirstOrDefault(p => p.Key == produto.Id).Value;
+                    
                     if (produto.EstaDisponivel(quantidadeProduto))
                     {
                         produto.RetirarEstoque(quantidadeProduto);
@@ -83,11 +82,10 @@ namespace NSE.Catalogo.API.Services
             }
         }
 
-        private async void CancelarPedidoSemEstoque(PedidoAutorizadoIntegrationEvent message)
+        public async void CancelarPedidoSemEstoque(PedidoAutorizadoIntegrationEvent message)
         {
             var pedidoCancelado = new PedidoCanceladoIntegrationEvent(message.ClienteId, message.PedidoId);
             await _bus.PublishAsync(pedidoCancelado);
-
         }
     }
 }

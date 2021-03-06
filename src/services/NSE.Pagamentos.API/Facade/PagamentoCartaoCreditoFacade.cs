@@ -2,9 +2,10 @@
 using System.Threading.Tasks;
 using Microsoft.Extensions.Options;
 using NSE.Pagamentos.API.Models;
+using NSE.Pagamentos.Facade;
 using NSE.Pagamentos.NerdsPag;
 
-namespace NSE.Pagamentos.API.Facade
+namespace NSE.Pagamentos.CardAntiCorruption
 {
     public class PagamentoCartaoCreditoFacade : IPagamentoFacade
     {
@@ -68,7 +69,7 @@ namespace NSE.Pagamentos.API.Facade
             return new Transacao
             {
                 Id = Guid.NewGuid(),
-                Status = (StatusTransacao)transaction.Status,
+                Status = (StatusTransacao) transaction.Status,
                 ValorTotal = transaction.Amount,
                 BandeiraCartao = transaction.CardBrand,
                 CodigoAutorizacao = transaction.AuthorizationCode,
@@ -83,7 +84,7 @@ namespace NSE.Pagamentos.API.Facade
         {
             return new Transaction(nerdsPagService)
             {
-                Status = (TransactionStatus)transacao.Status,
+                Status = (TransactionStatus) transacao.Status,
                 Amount = transacao.ValorTotal,
                 CardBrand = transacao.BandeiraCartao,
                 AuthorizationCode = transacao.CodigoAutorizacao,

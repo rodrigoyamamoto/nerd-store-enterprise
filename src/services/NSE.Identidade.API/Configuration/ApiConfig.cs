@@ -37,6 +37,7 @@ namespace NSE.Identidade.API.Configuration
                 endpoints.MapControllers();
             });
 
+            // default: mydomain/jwks
             app.UseJwksDiscovery();
 
             return app;

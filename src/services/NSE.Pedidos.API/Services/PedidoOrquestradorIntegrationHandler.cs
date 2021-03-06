@@ -17,7 +17,8 @@ namespace NSE.Pedidos.API.Services
         private readonly ILogger<PedidoOrquestradorIntegrationHandler> _logger;
         private Timer _timer;
 
-        public PedidoOrquestradorIntegrationHandler(ILogger<PedidoOrquestradorIntegrationHandler> logger, IServiceProvider serviceProvider)
+        public PedidoOrquestradorIntegrationHandler(ILogger<PedidoOrquestradorIntegrationHandler> logger,
+            IServiceProvider serviceProvider)
         {
             _logger = logger;
             _serviceProvider = serviceProvider;
@@ -25,7 +26,7 @@ namespace NSE.Pedidos.API.Services
 
         public Task StartAsync(CancellationToken cancellationToken)
         {
-            _logger.LogInformation("Serviço de pedidos iniciado");
+            _logger.LogInformation("Serviço de pedidos iniciado.");
 
             _timer = new Timer(ProcessarPedidos, null, TimeSpan.Zero,
                 TimeSpan.FromSeconds(15));
@@ -49,7 +50,7 @@ namespace NSE.Pedidos.API.Services
 
                 await bus.PublishAsync(pedidoAutorizado);
 
-                _logger.LogInformation($"Pedido ID: {pedido.Id} foi encaminhado para baixa no estoque");
+                _logger.LogInformation($"Pedido ID: {pedido.Id} foi encaminhado para baixa no estoque.");
             }
         }
 

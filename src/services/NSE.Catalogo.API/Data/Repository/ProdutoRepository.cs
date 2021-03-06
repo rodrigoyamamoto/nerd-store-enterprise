@@ -22,14 +22,11 @@ namespace NSE.Catalogo.API.Data.Repository
 
         public async Task<PagedResult<Produto>> ObterTodos(int pageSize, int pageIndex, string query = null)
         {
-            /* using entity framework to return paged results
-            return await _context.Produtos.AsNoTracking()
-                .Skip(pageSize * (pageIndex - 1)).Take(pageSize)
-                .Where(c => c.Nome.Contains(query))
-                .ToListAsync();
-            */
+            // using entity framework, returns Task<IEnumerable<Produto>>
+            //return await _context.Produtos.AsNoTracking()
+            //    .Skip(pageSize * (pageIndex - 1)).Take(pageSize)
+            //    .Where(c => c.Nome.Contains(query)).ToListAsync();
 
-            // using dapper
             var sql = @$"SELECT * FROM Produtos 
                       WHERE (@Nome IS NULL OR Nome LIKE '%' + @Nome + '%') 
                       ORDER BY [Nome] 

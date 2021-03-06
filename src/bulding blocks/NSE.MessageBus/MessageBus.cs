@@ -57,7 +57,7 @@ namespace NSE.MessageBus
         public async Task<TResponse> RequestAsync<TRequest, TResponse>(TRequest request)
             where TRequest : IntegrationEvent where TResponse : ResponseMessage
         {
-            TryConnect(); // aqui
+            TryConnect();
             return await _bus.RequestAsync<TRequest, TResponse>(request);
         }
 
@@ -77,7 +77,7 @@ namespace NSE.MessageBus
 
         private void TryConnect()
         {
-            if (IsConnected) return;
+            if(IsConnected) return;
 
             var policy = Policy.Handle<EasyNetQException>()
                 .Or<BrokerUnreachableException>()
