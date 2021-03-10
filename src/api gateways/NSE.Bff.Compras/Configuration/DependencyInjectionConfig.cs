@@ -7,7 +7,7 @@ using NSE.WebAPI.Core.Extensions;
 using NSE.WebAPI.Core.Usuario;
 using Polly;
 
-namespace NSE.Bff.Compras.Configuration.Configuration
+namespace NSE.Bff.Compras.Configuration
 {
     public static class DependencyInjectionConfig
     {
